@@ -13,11 +13,17 @@ Welcome to the documentation for **SONIC-A3**, an unofficial personal research
 derivative of NVIDIA's GR00T Whole-Body Control / SONIC stack. This project is
 not affiliated with or endorsed by NVIDIA or Zhiyuan Robotics.
 
-Many pages below are retained from upstream and describe NVIDIA's G1-oriented
-SONIC features rather than validated A3 capabilities. For the actual A3 status,
-limitations, evidence boundary, and asset rules, start with the repository
-``README.md`` and ``docs/a3/`` documents.
+Many pages below are retained upstream references for G1, not validated A3
+capabilities or proof that removed deployment packages are bundled here.
 
+A3 project entry points
+----------------------
+
+* `Current scope and status <https://github.com/ytzdolp/SONIC-A3-public/blob/main/README.md>`_
+* `A3 installation <https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/INSTALLATION.md>`_
+* `Results and evidence limits <https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/RESULTS.md>`_
+* `Assets and licenses <https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/ASSETS_AND_LICENSES.md>`_
+* `Outstanding publication items <https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/PUBLICATION_FOLLOWUP.md>`_
 
 What is SONIC-A3?
 -----------------
@@ -45,44 +51,15 @@ Upstream GEAR-SONIC news (retained for reference)
 - **[2026-02-19]** Released GEAR-SONIC: pretrained checkpoints, C++ inference, VR teleoperation, and documentation.
 - **[2025-11-12]** Initial release with Decoupled WBC for GR00T N1.5 and N1.6.
 
-GEAR-SONIC (upstream)
----------------------
-.. image:: _static/sonic-preview-gif-480P.gif
-   :width: 100%
-   :align: center
+Upstream demonstrations
+-----------------------
 
+The original G1 demonstrations belong to the upstream project and are not
+evidence of A3 performance. Videos and GIFs are deliberately not bundled.
 
-.. raw:: html
-
-   <p style="margin-top: 0; margin-bottom: 1em;">
-     <a href="https://nvlabs.github.io/GEAR-SONIC/"><img src="https://img.shields.io/badge/🌐_Website-GEAR--SONIC-76B900" alt="Website"></a>
-     <a href="https://arxiv.org/abs/2511.07820"><img src="https://img.shields.io/badge/📄_arXiv-2511.07820-b31b1b" alt="Paper"></a>
-     <a href="https://github.com/ytzdolp/SONIC-A3-public"><img src="https://img.shields.io/badge/💻_GitHub-Repository-181717" alt="GitHub"></a>
-   </p>
-
-**SONIC** is a humanoid behavior foundation model that gives robots a core set of motor skills learned from large-scale human motion data. Rather than building separate controllers for every motion, SONIC uses motion tracking as a scalable training task so a single unified policy can produce natural, whole-body movement and support a wide range of behaviors.
-
-🎯 Key Features:
-
-- 🚶 Natural whole-body locomotion (walking, crawling, dynamic movements)
-- 🎮 Real-time VR teleoperation support
-- 🤖 Foundation for higher-level planning and interaction
-- 📦 Ready-to-deploy C++ inference stack
-
-Quick Start: Sim2Sim
---------------------
-
-Quickly test the SONIC deployment stack in MuJoCo before deploying on real hardware.
-
-.. raw:: html
-
-   <video width="100%" autoplay loop muted playsinline style="border-radius: 8px; margin: 0 0 1.5em 0;">
-     <source src="_static/sim2sim.mp4" type="video/mp4">
-   </video>
-
-.. tip::
-
-   **Get running in minutes!** Follow the :doc:`Installation <getting_started/installation_deploy>` and :doc:`Quickstart <getting_started/quickstart>` guides to see this in action on your machine.
+See the `upstream SONIC project and demonstrations <https://nvlabs.github.io/GEAR-SONIC/>`_
+and `upstream source <https://github.com/NVlabs/GR00T-WholeBodyControl>`_.
+For this derivative, use the A3 entry points above.
 
 Documentation
 -------------

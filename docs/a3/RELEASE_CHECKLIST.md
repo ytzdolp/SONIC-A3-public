@@ -1,8 +1,13 @@
 # Release checklist
 
+See [PUBLICATION_FOLLOWUP.md](PUBLICATION_FOLLOWUP.md) for unresolved owner/provider actions.
+The working-tree checker does not certify rights, staged content, history, or server-side removal.
+
 Before every push:
 
-- [ ] `python tools/check_release.py` passes
+- [ ] `python -B tools/test_check_release.py` passes
+- [ ] `python -B tools/check_release.py` passes
+- [ ] local release rules remain ignored and are not force-added
 - [ ] no credentials, tokens, private keys, internal hosts, or personal paths
 - [ ] no files above GitHub's ordinary Git limit
 - [ ] no virtual environments, logs, checkpoints, or datasets
@@ -30,8 +35,8 @@ license and documentation files. Require the full command for later commits.
 Before changing the repository to public:
 
 - [ ] review all Git history, not only the working tree
-- [ ] purge the removed SMPLify-X function and old machine-specific release
-      rules from reachable history, or obtain written redistribution permission
+- [ ] remove restricted code and machine-specific rules from reachable history;
+      separately check old-SHA access, hosting caches, and remaining redistribution rights
 - [ ] confirm licenses for every robot asset, motion file, and checkpoint
 - [ ] replace local paths with placeholders
 - [ ] add a model/data card for every downloadable artifact

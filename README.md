@@ -191,6 +191,11 @@ When publishing models separately, record at least:
 - simulator and Isaac Lab versions;
 - applicable model, robot-asset, and dataset licenses.
 
+## Publication follow-up
+
+See [the remaining evidence and hosting checklist](docs/a3/PUBLICATION_FOLLOWUP.md)
+for teacher rights, evaluation records, and previously published objects.
+
 ## License and attribution
 
 Retain [LICENSE](LICENSE), upstream copyright headers, and third-party notices.

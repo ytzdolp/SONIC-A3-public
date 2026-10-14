@@ -9,9 +9,11 @@ distributed in this repository.
 These values are self-reported from the private workspace. The public snapshot
 does not include the relevant weights, raw logs, rollout manifests, or the
 contract-specific MuJoCo evaluator, so a third party cannot independently
-reproduce the tables from this repository alone. In addition, the rights scope
-for the externally supplied teacher has not yet been documented; results and
-derived artifacts involving that teacher remain provisional for publication.
+reproduce the tables from this repository alone. Private experiments used an
+A3 walking controller obtained through a legitimate project channel as a
+teacher, but the scope for public release of teacher-derived data or models has
+not been documented here. The controller and related private artifacts are not
+redistributed, and the project does not claim vendor endorsement.
 
 ## Acceptance policy
 

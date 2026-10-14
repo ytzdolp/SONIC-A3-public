@@ -24,7 +24,7 @@
 | MuJoCo sim-to-sim | 三秒有界门槛技术通过 | 四秒合计 `106/108`：基础动作 `52/54`、未见动作 `54/54`；三秒可达多初态门 `108/108`；公开仓库缺少独立复现材料 |
 | Basketball integration | 暂缓 | 等基础 locomotion 和 whole-body physics 通过验收 |
 
-授权与证据边界：外部 teacher 的许可范围尚待提供方书面确认，因此 teacher-derived 数据、模型和结果均按暂定历史实验记录处理。公开仓库未包含权重、原始日志、rollout manifest 和专用 MuJoCo evaluator；不得把三秒 `108/108` 单独概括成“100% 成功率”，必须同时给出四秒 `106/108`、可达 rollout 初态范围和未完成 sim-to-real 的限制。
+授权与证据边界：私有实验使用了通过合法项目渠道获得的 A3 行走控制器作为 teacher；公开仓库不分发该控制器、部署配置、数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书。teacher-derived 数据或模型的对外发布范围仍待确认，因此相关结果按有边界的历史实验记录处理。公开仓库未包含权重、原始日志、rollout manifest 和专用 MuJoCo evaluator；不得把三秒 `108/108` 单独概括成“100% 成功率”，必须同时给出四秒 `106/108`、可达 rollout 初态范围和未完成 sim-to-real 的限制。
 
 ## 发展过程与结果
 
@@ -44,9 +44,9 @@
 
 这些实验解释了早期失败，却没有产生可靠的 walking rollout，因此旧 residual teacher 和旧 walking checkpoint 只保留诊断价值，不作为当前模型起点。
 
-### 4. 使用外部提供的 A3 walking teacher（授权范围待核实）
+### 4. 使用通过合法项目渠道获得的 A3 walking teacher
 
-私有实验环境曾使用一个外部提供的 A3 walking actor 作为物理 teacher，并在 SONIC 侧增加 64 维 token 条件路径，最终统一为 29 维 A3 action。当前仓库没有可核验材料证明许可覆盖 rollout 生成、学生蒸馏、结果公开或衍生模型发布；外部模型、部署实现及其精确数值契约也不包含在公开仓库中。
+私有实验环境曾使用一个通过合法项目渠道获得的 A3 行走控制器作为物理 teacher，并在 SONIC 侧增加 64 维 token 条件路径，最终统一为 29 维 A3 action。公开仓库不分发该控制器、部署实现、精确数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书；teacher-derived 数据或模型的对外发布范围仍待确认。
 
 第一次接入仍出现前进不足和转向异常。继续检查后发现四个隐蔽接口问题：
 
@@ -57,13 +57,13 @@
 
 修复 root rotvec、步频和 action scale 后，我们重新从外部模型恢复并冻结 teacher core，把 token projection 置零，再用逐帧等价性测试确认移植路径没有发生权重漂移。该恢复和契约检查代码仅保留在私有工作区。
 
-### 5. 验收稳定的外部物理 teacher
+### 5. 验收稳定的私有物理 teacher
 
 修复后的 exact-action 模型在 6 个已训练命令上全部运行到 frame 649，只因 episode timeout 结束：站立、`0.2/0.3/0.4 m/s` 前进和左右 `0.3 rad/s` 转向均未提前跌倒。
 
 随后使用 6 个未见命令测试插值和组合泛化：`0.25/0.35 m/s` 前进、左右 `0.15 rad/s` 慢转，以及 `0.3 m/s ± 0.15 rad/s` 曲线行走。6 组也全部运行到 timeout。
 
-这在技术层面说明外部 A3 policy 在私有实验环境中可作为可靠物理 teacher。它不等于纯原生 SONIC Dynamic Decoder 已完成，也不证明其许可覆盖后续用途；checkpoint 的正确行为仍依赖匹配的 observation history、robot type 和 action scale 契约。
+这在技术层面说明该 A3 行走控制器在私有实验环境中可作为可靠物理 teacher。它不等于纯原生 SONIC Dynamic Decoder 已完成，也不代表厂商对本项目背书；checkpoint 的正确行为仍依赖匹配的 observation history、robot type 和 action scale 契约。
 
 该 teacher checkpoint 及其运行时契约不在公开仓库分发。
 

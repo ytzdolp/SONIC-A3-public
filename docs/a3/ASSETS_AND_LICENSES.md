@@ -34,18 +34,20 @@ For every asset considered for publication, record:
 
 Private GitHub visibility does not override these terms.
 
-## External A3 walking policy
+## Privately obtained A3 walking controller
 
-The private research workspace used an externally supplied walking actor as a
-teacher. This public snapshot excludes that actor, its deployment program,
+The project owner states that the private research workspace obtained an A3
+walking controller through a legitimate project channel and used it as a
+teacher. This public snapshot excludes that controller, its deployment program,
 original configuration, recorded rollouts, exact observation/action contract,
-and contract-specific runtime bridge.
+contract-specific runtime bridge, and related model weights. The project does
+not claim vendor endorsement.
 
-The provider's permission scope has **not** been documented in this repository.
-Until written terms are confirmed, this project must not claim that permission
-covers rollout generation, student distillation, publication of results, or
-distribution of derived checkpoints. Absence of the actor weights from Git is
-not evidence that those other uses are permitted.
+The scope for public release of teacher-derived data or models has **not** been
+documented in this repository. Until applicable terms are confirmed, this
+project must not claim that access covers public distribution of rollouts or
+derived checkpoints. Absence of the controller weights from Git is not evidence
+that those additional publication rights have been granted.
 
 The public offline trainers accept runtime scale and joint metadata from a
 user-provided rollout only when that user has independently verified the

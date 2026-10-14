@@ -4,13 +4,34 @@ Updated: 2026-10-14
 
 ## Current status
 
-The private research workspace used an externally supplied A3 walking actor.
+The project owner states that the private research workspace obtained an A3
+walking controller through a legitimate project channel and used it as a
+teacher. The public repository does not redistribute that controller, its
+deployment configuration, numerical contract, rollouts, telemetry, training
+data, or related model weights.
+
 The repository does not currently contain written terms that establish the
-scope of permission. Accordingly, SONIC-A3 does **not** represent that this
-actor or teacher-derived material is "authorized" for every project use.
+scope for public release of teacher-derived data or models. Accordingly,
+SONIC-A3 does **not** represent vendor endorsement or claim that access to the
+controller authorizes every possible downstream publication or redistribution.
 
 This status does not establish infringement. It records that the public
 release cannot yet verify the relevant rights.
+
+## Public description
+
+Use the following bounded description in public project materials:
+
+> Private experiments used an A3 walking controller obtained through a
+> legitimate project channel as a teacher. The public repository does not
+> redistribute the controller, deployment configuration, numerical contract,
+> rollouts, training data, or related model weights. It contains independently
+> written integration and training code together with bounded experimental
+> records. The project does not represent vendor endorsement.
+
+Do not shorten this to "officially authorized teacher" or "official walking
+policy" unless the provider or vendor provenance and the relevant permission
+scope can be documented.
 
 ## Confirmation required from the provider
 

@@ -31,17 +31,17 @@ Isaac Lab 物理执行
 - 明确 Isaac Lab 用户配置层的 stiffness/damping 直接使用 SI 单位 `N·m/rad` 与 `N·m·s/rad`；不能再额外乘以约 57.3。
 - 建立 A3 motion 数据、retarget 和 GUI 检查流程，筛除了明显不稳定或不适合训练的参考动作。
 - 原生训练并独立验证 A3 Encoder 与 Kinematic Decoder；64 维 token 能重建摆臂、腰部重心转移等 A3 动作。
-- 私有实验环境曾使用外部提供的 A3 walking actor 作为 teacher，同时增加 64 维 token 接口并统一到 29 维 A3 action；该 actor 的授权范围尚未取得可核验的书面记录，外部模型及精确运行时契约不在公开仓库分发。
+- 私有实验环境曾使用通过合法项目渠道获得的 A3 行走控制器作为 teacher，同时增加 64 维 token 接口并统一到 29 维 A3 action；公开仓库不分发该控制器、部署配置、数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书。teacher-derived 数据或模型的对外发布范围仍待确认。
 - 修复 teacher 桥接中的根朝向丢失、转向步频、action scale 和 checkpoint 权重漂移，使监督数据与物理执行保持一致。
 - 用 6 个训练命令和 6 个未见命令完成旧协议闭环测试，并在后续严格评估中记录每个环境的首次终止，不再用全局步数上限代替成功判据。
-- 在技术层面建立稳定的物理 teacher，并完成 clean、push 和未见命令 rollout 采集；首批数据共 `46,800` 个 transition。其继续使用、结果公开和衍生模型发布均以完成外部 teacher 权利核实为前提。
+- 在技术层面建立稳定的物理 teacher，并完成 clean、push 和未见命令 rollout 采集；首批数据共 `46,800` 个 transition。相关数据和衍生模型不在公开仓库分发，对外发布须符合适用条款。
 - 完成原生 Dynamic Decoder 的随机初始化离线蒸馏、五轮 DAgger 数据聚合和保守在线 PPO 微调。
 - 建立统一训练契约：`640D encoder input → 64D FSQ token`，再与 `930D term-major proprio history` 合并输出 `29D action`。
 - 建立完整序列 holdout、已知/未见命令双测试集和闭环优先的 checkpoint 选择流程，避免用低离线 loss 代替物理成功。
 - 通过参数审计确认训练只改变 A3 Dynamic Decoder；Encoder 与 Kinematic Decoder 始终保持冻结。
 - 废弃在错误执行器配置上训练的旧 step700 主线，用正确 stiffness/damping、action scale、root yaw 和历史观测契约重新训练并选定 step8000 backbone。
 - 在冻结 step8000 backbone 后加入零输出、15 关节受限 action adapter，并用带 checkpoint/action-contract 哈希的 schema-v2 runtime 数据完成两轮 DAgger。
-- Round2 在六个基础动作上 seed0 达到 `6/6`，多种子达到 `23/24`；它是当前受保护的 A3 episodic locomotion 技术基线，但其训练数据来自外部 teacher，公开使用边界仍待核实。
+- Round2 在六个基础动作上 seed0 达到 `6/6`，多种子达到 `23/24`；它是当前受保护的 A3 episodic locomotion 技术基线，但其训练数据来自上述私有 teacher，相关数据或模型的对外发布范围仍待确认。
 - 完成 20 动作 Round3 泛化与选择性 DAgger 对照；候选均未超过 Round2，因此按闭环门槛拒绝，没有覆盖成功模型。
 - 固化 G1 与 A3 Encoder 的共同输入契约 `10×64=640D` 和 `2×32=64D` FSQ token，完成 joint-order、帧率、配对 motion 与 checkpoint 哈希审计。
 - 在 Round2 schema-v2 闭环状态上训练小型 G1→A3 latent adapter；10,110 帧验证集的 token cosine 从 `-0.0566` 提升到 `0.9554`，最终 action cosine 达到 `0.99986`。

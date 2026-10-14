@@ -12,11 +12,15 @@ motion representation and control stack to the Zhiyuan A3 humanoid.
 > alignment, and real-robot deployment are not complete.
 
 > **Evidence and rights boundary:** these are self-reported private-workspace
-> results; the public repository does not include the weights, raw logs,
-> rollout manifests, or contract-specific evaluator needed to reproduce them.
-> The permission scope for the externally supplied teacher has not yet been
-> documented, so teacher-derived results and models remain provisional for
-> publication. Never quote `108/108` without also stating the four-second
+> results. Private experiments used an A3 walking controller obtained through
+> a legitimate project channel as a teacher. This public repository does not
+> redistribute that controller, its deployment configuration, numerical
+> contract, rollouts, training data, related model weights, or the private
+> evaluator needed to reproduce the results. It contains independently written
+> integration and training code together with bounded experimental records.
+> This project does not claim vendor endorsement, and public release of
+> teacher-derived data or models remains pending confirmation of the applicable
+> terms. Never quote `108/108` without also stating the four-second
 > result (`106/108` overall), the three-second reachable-state threshold, and
 > the lack of sim-to-real validation.
 
@@ -45,7 +49,7 @@ frozen, correctly configured A3 Dynamic Decoder plus a zero-initialized,
 | Capability | Result |
 |---|---|
 | A3 Encoder + Kinematic Decoder | 64D token reconstruction independently validated |
-| External A3 walking teacher used in private experiments | Historical tests recorded; permission scope not yet documented; no actor or derived artifact is released |
+| A3 walking controller used as a private teacher | Obtained through a legitimate project channel; no controller, private contract, rollout, or derived model is released |
 | Native Dynamic Decoder backbone | Correct-config step8000 selected; 2/6 alone |
 | Round2 known locomotion | 6/6 at seed0; 23/24 across four seeds |
 | Round2 held-out locomotion | 15/24 across four seeds |
@@ -155,7 +159,7 @@ The accepted path is:
 ```text
 A3 motion and 29-DoF contract
         -> native Encoder + Kinematic Decoder
-        -> externally supplied walking teacher (rights scope pending)
+        -> privately obtained A3 walking teacher (no redistribution)
         -> correct-config native Dynamic Decoder (step8000)
         -> schema-v2 student-state DAgger
         -> bounded action adapter Round2

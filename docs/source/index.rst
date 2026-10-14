@@ -30,8 +30,10 @@ What is SONIC-A3?
 
 This codebase adapts selected upstream motion representation, training, and
 control components to the Zhiyuan A3 29-DoF contract. The current A3 result is
-a simulation-only episodic locomotion research baseline; it is not a validated
-real-robot release.
+an episodic locomotion research baseline developed primarily in simulation.
+Standing and the lowest-speed ``forward_020`` command have passed a basic
+real-robot validation; this is not a complete real-robot release or broad
+sim-to-real validation.
 
 The upstream codebase provides:
 

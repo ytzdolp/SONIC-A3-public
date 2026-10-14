@@ -43,11 +43,11 @@ original configuration, recorded rollouts, exact observation/action contract,
 contract-specific runtime bridge, and related model weights. The project does
 not claim vendor endorsement.
 
-The scope for public release of teacher-derived data or models has **not** been
-documented in this repository. Until applicable terms are confirmed, this
-project must not claim that access covers public distribution of rollouts or
-derived checkpoints. Absence of the controller weights from Git is not evidence
-that those additional publication rights have been granted.
+Access to the controller does not by itself establish permission to redistribute
+every teacher-derived dataset, rollout, or checkpoint. Applicable publication
+and redistribution terms must therefore be checked separately before any such
+artifact is released. Absence of the controller weights from Git is not evidence
+of additional publication rights.
 
 The public offline trainers accept runtime scale and joint metadata from a
 user-provided rollout only when that user has independently verified the

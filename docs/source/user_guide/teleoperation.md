@@ -21,10 +21,8 @@ The robot will track your full-body movements in real-time. Always maintain a cl
 A typical whole-body teleoperation session follows this workflow:
 
 
-```{video} ../_static/teleop/teleop_session_overview.mp4
-:width: 100%
-```
-*Video: Full startup sequence — calibrating the PICO headset, engaging the policy, and the robot starting to balance independently on the gantry.*
+The full startup video belongs to the upstream media set and is not bundled in
+this public snapshot. The written sequence below is preserved.
 
 **Terminal 1 — MuJoCo Simulator** (or skip for real robot):
 ```bash
@@ -81,10 +79,8 @@ python gear_sonic/scripts/pico_manager_thread_server.py --manager
 
 ## WiFi Delays
 
-```{video} ../_static/teleop/teleop_natural_movement.mp4
-:width: 100%
-```
-*Video: Demonstrating how natural vs. hesitant walking affects robot stability — stumbling caused by WiFi delays or unnatural movement.*
+The upstream natural-movement and latency demonstration video is not bundled
+in this public snapshot.
 
 **Network latency should be kept as low as possible.** We provide tools to detect delays. Network delays can significantly affect the GEAR-SONIC policy's performance, as the flow of movement for the robot will be interrupted mid-movement (say mid-stride during walking) and the robot can stumble or lose balance.
 
@@ -109,10 +105,8 @@ If you see persistent high latency warnings, improve your network setup before c
 
 ## Movement Patterns
 
-```{video} ../_static/teleop/teleop_walking.mp4
-:width: 100%
-```
-*Video: Walking demo — forward, backward, running, and sideways movement with natural gait.*
+The upstream walking demonstration video is not bundled in this public
+snapshot.
 
 **Try to be as natural as possible.** The GEAR-SONIC policy is trained on natural human motion, so moving naturally gives the best results. Hesitating when moving actually lead to more stumbling! 
 
@@ -131,10 +125,8 @@ If you see persistent high latency warnings, improve your network setup before c
 
 **Advanced movements:**
 
-```{video} ../_static/teleop/teleop_advanced.mp4
-:width: 100%
-```
-*Video: Advanced movements — kneeling, dynamic leg motions, and challenging poses.*
+The upstream advanced-movement demonstration video is not bundled in this
+public snapshot.
 
 Once comfortable with basic walking:
 - **Turning** — Turn naturally by rotating your torso and stepping in the new direction
@@ -174,10 +166,8 @@ When switching between modes, **always match the robot's current pose first**.
 
 **Pause feature (Menu button):**
 
-```{video} ../_static/teleop/teleop_pause.mp4
-:width: 100%
-```
-*Video: Using the Menu button to pause and resume pose streaming during teleoperation.*
+The upstream pause/resume demonstration video is not bundled in this public
+snapshot.
 
 - Holding **Menu** pauses pose streaming
 - **Before releasing Menu**, move your body back to match the robot's current pose
@@ -242,4 +232,4 @@ Both methods immediately halt the policy and exit control mode.
 
 - **Understand input interfaces** — See tutorials for [Keyboard](../tutorials/keyboard.md), [Gamepad](../tutorials/gamepad.md), [ZMQ](../tutorials/zmq.md), [Manager](../tutorials/manager.md)
 - **Learn about deployment** — See [Deployment Code & Program Flow](../references/deployment_code)
-- **General troubleshooting** — See [Troubleshooting Guide](troubleshooting) 
+- **General troubleshooting** — See [Troubleshooting Guide](troubleshooting)

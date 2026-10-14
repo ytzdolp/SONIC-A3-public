@@ -80,9 +80,10 @@ Videos are written to `/tmp/sonic_renders`. For full-dataset evaluation and expe
 
 ## Sim2Sim in MuJoCo
 
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px; margin: 1em 0;">
-  <source src="../_static/sim2sim.mp4" type="video/mp4">
-</video>
+The upstream sim-to-sim demonstration video is not bundled in this public
+snapshot. See the
+[official GR00T-WholeBodyControl documentation](https://nvlabs.github.io/GR00T-WholeBodyControl/)
+for the complete media set.
 
 For testing in a MuJoCo simulator, run the simulation loop and deployment script in separate terminals.
 

@@ -7,11 +7,9 @@ Full whole-body teleoperation using PICO VR headset and controllers. To teleop, 
 The sequence below shows 3-point VR teleoperation with SONIC Low Latency,
 including whole-body tracking and a successful ground pickup.
 
-```{image} ../_static/sonic_low_latency_demo.gif
-:alt: SONIC Low Latency whole-body teleoperation and ground pickup
-:width: 640px
-:align: center
-```
+The corresponding NVIDIA demo is available from the
+[GEAR-SONIC project page](https://nvlabs.github.io/GEAR-SONIC/). Its media is
+not bundled in this public snapshot and is not evidence of an A3 experiment.
 
 ```{admonition} Isaac Teleop / CloudXR Scope
 :class: note
@@ -25,10 +23,9 @@ Whole-body teleoperation involves fast, agile motions. **Always** maintain a cle
 You **must wear tight-fitting pants or leggings** to guarantee line-of-sight for the foot trackers — loose or baggy clothing can make tracking fail unpredictably and may result in dangerous motion.
 ```
 
-```{video} ../_static/teleop/teleop_session_overview.mp4
-:width: 100%
-```
-*Video: End-to-end teleoperation walkthrough — PICO calibration, policy engagement, and the robot balancing independently. See the [Teleoperation Guide](../user_guide/teleoperation.md) for detailed best practices.*
+The end-to-end upstream walkthrough is not bundled here. See the
+[Teleoperation Guide](../user_guide/teleoperation.md) for the complete written
+workflow and safety practices.
 
 ## Prerequisites
 
@@ -119,12 +116,8 @@ When you turn on the visualization, wait for a window to pop up showing a Unitre
 4. Press **A + X** again to fall back to **PLANNER** (idle) mode.
 5. Press **A + B + X + Y** again to stop the robot.
 
-<figure style="margin: 1em 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/teleop_calib/basic_flow_web.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Basic whole-body teleop workflow: calibration pose → engage → POSE mode → PLANNER idle → stop.</figcaption>
-</figure>
+The upstream basic-flow video is not included in this public snapshot. The
+steps above remain the authoritative workflow description in this copy.
 
 ---
 
@@ -219,12 +212,8 @@ Each time you enter `VR_3PT` via **Left Stick Click**, the system re-calibrates 
 
 Below is an example of **bad calibration practice** — transitioning into VR_3PT without aligning your arms to the robot's current pose. The robot may not jump immediately, but will exhibit erratic and dangerous motion as soon as you move.
 
-<figure style="margin: 1em 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/teleop_calib/BAD_Calib_VR3PT_web.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Bad practice: entering VR_3PT without arm alignment causes erratic, unsafe motion.</figcaption>
-</figure>
+The upstream bad-calibration video is not included here; the safety warning
+and recovery sequence below are preserved in full.
 
 
 
@@ -241,12 +230,8 @@ Below is an example of **bad calibration practice** — transitioning into VR_3P
 
 Below is the **recovery procedure** — if you accidentally enter a badly calibrated VR_3PT state, freeze the upper body (Left Stick Click back), then switch to POSE mode (A+X) to reset safely.
 
-<figure style="margin: 1em 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/teleop_calib/BAD_Calib_VR3PT_recover_web.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Recovery from bad VR_3PT calibration: freeze upper body → re-align → switch to POSE mode.</figcaption>
-</figure>
+The upstream recovery video is not included here; use the numbered recovery
+procedure above.
 
 ### Quick-Start Cheatsheet
 

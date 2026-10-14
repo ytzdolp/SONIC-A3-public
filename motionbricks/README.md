@@ -9,6 +9,14 @@
   <img src="assets/teaser_motion_bricks_three_rows.jpg" alt="MotionBricks teaser" width="100%">
 </p>
 
+> **SONIC-A3-public snapshot:** this repository retains the upstream
+> MotionBricks source and documentation for attribution and compatibility, but
+> does not bundle its pretrained checkpoints, mesh package, or GIF gallery.
+> Obtain complete MotionBricks assets from the
+> [upstream repository](https://github.com/NVlabs/GR00T-WholeBodyControl) under
+> their applicable terms. The upstream demonstrations are not evidence of A3
+> performance.
+
 MotionBricks is a real-time generative framework that transforms interactive motion control for animation and robotics. By combining a large-scale latent backbone with intuitive "smart primitives," it delivers high-quality, zero-shot motion synthesis at 15,000 FPS, allowing users to effortlessly build complex animations and robotic movements like assembling bricks.
 
 ## Contents
@@ -38,39 +46,9 @@ MotionBricks is a real-time generative framework that transforms interactive mot
 
 ## Results
 
-See the [project page](https://nvlabs.github.io/motionbricks) for the full uncut demos and comparison videos. Short clips below are GIFs (muted, ~10 s each).
-
-### Teasers
-
-| Animation | Robotics |
-| :---: | :---: |
-| ![Animation teaser](assets/gifs/teaser_animation.gif) | ![Robotics teaser](assets/gifs/teaser_robotics.gif) |
-
-### Smart Locomotion — Single Styles
-
-| Zombie | Injured leg |
-| :---: | :---: |
-| ![Zombie](assets/gifs/loco_zombie.gif) | ![Injured leg](assets/gifs/loco_injured_leg.gif) |
-| **Injured torso** | **Skipping** |
-| ![Injured torso](assets/gifs/loco_injured_torso.gif) | ![Skipping](assets/gifs/loco_skipping.gif) |
-| **Strafing** | **Crouch strafing** |
-| ![Strafing](assets/gifs/loco_strafing.gif) | ![Crouch strafing](assets/gifs/loco_crouch_strafing.gif) |
-
-### Smart Locomotion — Mixture of Styles
-
-| Freestyle | Idle · Walk · Jog · Run |
-| :---: | :---: |
-| ![Freestyle](assets/gifs/loco_freestyle.gif) | ![Idle / walk / jog / run](assets/gifs/loco_idle_walk_jog_run.gif) |
-
-### Smart Objects
-
-| Pick up sword | Falling |
-| :---: | :---: |
-| ![Pick up sword](assets/gifs/obj_pickup_sword.gif) | ![Falling](assets/gifs/obj_falling.gif) |
-| **Jump over bench** | **Sitting** |
-| ![Jump over bench](assets/gifs/obj_jump_bench.gif) | ![Sitting](assets/gifs/obj_sitting.gif) |
-| **Interactive authoring** | |
-| ![Interactive authoring](assets/gifs/obj_interactive_authoring.gif) | |
+The GIF gallery is not bundled in this source-only snapshot. See the
+[upstream MotionBricks project page](https://nvlabs.github.io/motionbricks) for
+the animation, robotics, locomotion-style, and smart-object demonstrations.
 
 ## Setup
 
@@ -78,13 +56,13 @@ See the [project page](https://nvlabs.github.io/motionbricks) for the full uncut
 
 ### Clone the repository
 
-MotionBricks ships as a subproject of [GR00T Whole-Body Control](https://github.com/NVlabs/GR00T-WholeBodyControl). Clone the parent repo and `cd` into `motionbricks/`. Pretrained checkpoints, mesh assets, and gallery GIFs are tracked with Git LFS, so install LFS before cloning:
+MotionBricks ships upstream as a subproject of [GR00T Whole-Body Control](https://github.com/NVlabs/GR00T-WholeBodyControl). To obtain its complete assets, clone the upstream parent repository and `cd` into `motionbricks/`. Pretrained checkpoints, mesh assets, and gallery GIFs are tracked there with Git LFS, so install LFS before cloning:
 
 ```bash
 git lfs install
 ```
 
-The parent repo skips MotionBricks pretrained checkpoints by default so a normal monorepo clone does not automatically download the extra ~2.2 GB of checkpoint files. MotionBricks GIFs and mesh assets still download normally. If you only need source code (for example, to train on your own data), clone normally:
+The upstream parent repository skips MotionBricks pretrained checkpoints by default so a normal monorepo clone does not automatically download the extra ~2.2 GB of checkpoint files. Its GIFs and mesh assets download through the upstream Git LFS configuration; they are not included in this SONIC-A3-public snapshot. If you only need upstream source code (for example, to train on your own data), clone normally:
 
 ```bash
 git clone https://github.com/NVlabs/GR00T-WholeBodyControl.git
@@ -135,9 +113,8 @@ DISPLAY=:1 python scripts/interactive_demo_g1.py
 
 This launches the MuJoCo viewer with the G1 robot. Use your keyboard to control it in real time. Hold the left mouse button and drag to change the camera look-at direction.
 
-<p align="center">
-  <img src="assets/gifs/interactive_demo.gif" alt="Interactive demo screencast" width="480">
-</p>
+The interactive-demo screencast is available from the upstream MotionBricks
+project rather than this source-only snapshot.
 
 ### Movement Controls
 
@@ -203,39 +180,23 @@ For a step-by-step guide to training MotionBricks on your own motion data and ad
 
 [Project page](https://research.nvidia.com/labs/sil/projects/kimodo/) · [GitHub](https://github.com/nv-tlabs/kimodo)
 
-<p align="center">
-  <img src="assets/gifs/kimodo_teaser.gif" alt="Kimodo teaser" width="480">
-</p>
-
 **GEAR-SONIC** — Together with MotionBricks, GEAR-SONIC anchors NVIDIA's GR00T Whole-Body Control initiative.
 
 [Project page](https://nvlabs.github.io/GEAR-SONIC/) · [GitHub](https://github.com/NVlabs/GR00T-WholeBodyControl)
-
-<p align="center">
-  <img src="assets/gifs/sonic_teaser.gif" alt="GEAR-SONIC teaser" width="480">
-</p>
 
 **BONES-SEED Dataset** — MotionBricks' training corpus — 350k production-grade mocap clips from real human actors and actresses.
 
 [Dataset page](https://huggingface.co/datasets/bones-studio/seed)
 
-<p align="center">
-  <img src="assets/gifs/bones_seed_teaser.gif" alt="BONES-SEED teaser" width="480">
-</p>
-
 **SOMA Retargeter** — The Newton-based solver that retargets SOMA capture onto the G1, producing MotionBricks' training data.
 
 [GitHub](https://github.com/NVIDIA/soma-retargeter)
-
-<p align="center">
-  <img src="assets/gifs/soma_retargeter_teaser.gif" alt="SOMA Retargeter teaser" width="480">
-</p>
 
 ## Project Structure
 
 ```
 motionbricks/
-  assets/skeletons/g1/     # MuJoCo XMLs and STL meshes
+  assets/skeletons/g1/     # MuJoCo XMLs; complete upstream assets are separate
   motionbricks/            # Python package
   scripts/
     interactive_demo_g1.py # Interactive demo

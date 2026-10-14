@@ -1,16 +1,12 @@
 # Motion Tracking and Kinematic Planner with Keyboard Controls
 
-<figure style="margin: 1em 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/Navigation.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">In-the-wild navigation demo using the kinematic planner with keyboard controls.</figcaption>
-</figure>
+The upstream navigation and planner demonstration media is not bundled in this
+public snapshot. See the
+[official GR00T-WholeBodyControl documentation](https://nvlabs.github.io/GR00T-WholeBodyControl/tutorials/keyboard.html)
+for those videos.
 
-```{video} ../_static/Keyboard_Guidance.mp4
-:width: 100%
-```
-*Video: Keyboard control walkthrough — starting the control system, playing reference motions, and using planner mode for real-time locomotion.*
+The keyboard-control walkthrough is part of the upstream media set linked
+above; it is not duplicated in this snapshot.
 
 Control the robot using keyboard commands for reference motion playback and planner-based locomotion (using `--input-type keyboard`).
 
@@ -151,32 +147,8 @@ Cycle through motion sets with **`N`** (next) / **`P`** (previous). Within each 
 For lateral (side-stepping) movement using **`,`** / **`.`**, we recommend keeping the target velocity at around **0.4 m/s**. Higher velocities during strafing can cause the robot's feet to collide due to the cross-legged foot placement required for lateral steps.
 ```
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin: 1em 0;">
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_happy.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Happy styled walking.</figcaption>
-</figure>
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_stealth.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Stealth styled walking.</figcaption>
-</figure>
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_injured.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Injured styled walking.</figcaption>
-</figure>
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_run.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Running locomotion mode.</figcaption>
-</figure>
-</div>
+The happy, stealth, injured, and running examples are shown in the linked
+upstream documentation; their videos are not included here.
 
 ### Set 1 — Squat / Ground
 
@@ -190,26 +162,8 @@ Height adjustable with **`-`** / **`=`** (0.2–0.8 m). Initial height defaults 
 | **4** | Hand Crawling | 0.4–1.0 m/s |
 | **5** | Elbow Crawling | 0.7–1.0 m/s |
 
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; margin: 1em 0;">
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_kneeling.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Kneeling mode with variable height control.</figcaption>
-</figure>
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/hand_crawling.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Hand crawling locomotion.</figcaption>
-</figure>
-<figure style="margin: 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_elbow_crawling.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Elbow crawling locomotion.</figcaption>
-</figure>
-</div>
+The kneeling, hand-crawling, and elbow-crawling example videos remain in the
+upstream documentation and are not included here.
 
 ### Set 2 — Boxing
 
@@ -223,12 +177,7 @@ Height adjustable with **`-`** / **`=`** (0.2–0.8 m). Initial height defaults 
 | **6** | Left Hook | 0.7–1.5 m/s |
 | **7** | Right Hook | 0.7–1.5 m/s |
 
-<figure style="margin: 1em 0;">
-<video width="100%" autoplay loop muted playsinline style="border-radius: 8px;">
-  <source src="../_static/kinematic_planner/planner_boxing.mp4" type="video/mp4">
-</video>
-<figcaption style="text-align: center; font-style: italic; margin-top: 0.5em;">Boxing mode demo.</figcaption>
-</figure>
+The boxing demonstration video remains in the linked upstream documentation.
 
 ### Set 3 — Additional Styled Walking
 

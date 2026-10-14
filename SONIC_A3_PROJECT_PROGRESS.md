@@ -12,9 +12,9 @@
 | A3 资产、29-DoF schema 与控制接口 | 完成 | 关节顺序、限位、默认姿态、映射、增益单位和 action scale 已核对 |
 | A3 motion 与 retarget | 完成首批 | 可支持运动学训练和 GUI 验证；不合格参考动作已排除 |
 | A3 Encoder + Kinematic Decoder | 完成 | 64D token 的 A3 动作重建已通过独立测试 |
-| 外部 A3 walking policy 接入 SONIC | 技术接口完成、授权待核实 | 历史 12 命令测试已记录；提供方是否允许生成数据、蒸馏、公开结果和衍生模型尚无可核验书面记录 |
-| A3 token adapter | 完成一轮对照 | 接口有效，但当前数据上未超过零 token 外部 teacher 基线 |
-| 稳定物理 teacher | 技术验证完成、权利待核实 | 外部 core + residual teacher 曾用于 clean、push、未见命令采集和 DAgger 在线标注；相关公开使用边界未确认 |
+| 私有 A3 walking controller 接入 SONIC | 技术接口完成 | 通过合法项目渠道获得并用于私有实验；控制器及相关私有材料不在公开仓库分发 |
+| A3 token adapter | 完成一轮对照 | 接口有效，但当前数据上未超过零 token 私有 teacher 基线 |
+| 稳定物理 teacher | 技术验证完成 | 私有 core + residual teacher 曾用于 clean、push、未见命令采集和 DAgger 在线标注；项目不代表厂商背书，衍生成果公开前须检查适用条款 |
 | 原生 A3 Dynamic Decoder | 完成正确配置重训 | 修正物理配置后重训至 step8000；纯 decoder 为已知 2/6，是当前冻结 backbone 而非最终控制器 |
 | Schema-v2 DAgger 与 action adapter | 完成 Round2 | 冻结 step8000 backbone，经两轮在线数据聚合和动作均衡 BC，已知动作多种子达到 23/24 |
 | Round2 episodic locomotion | 当前最佳 | 已知 6 动作 seed0 为 6/6，未见动作多种子 15/24；作为受保护基线进入下一阶段 |
@@ -22,9 +22,10 @@
 | 保守在线 PPO 微调 | 已验证并拒绝 | 在旧原生 decoder 与正确 step8000 adapter 上均未超过对应 BC/DAgger 起点 |
 | G1–A3 token alignment | 离线实验完成、在线拒绝 | 同域离线 token/action 接近 A3，但严格复测中 `forward_040` 在 frame 529 提前终止 |
 | MuJoCo sim-to-sim | 三秒有界门槛技术通过 | 四秒合计 `106/108`：基础动作 `52/54`、未见动作 `54/54`；三秒可达多初态门 `108/108`；公开仓库缺少独立复现材料 |
+| 真机基础验证 | 部分通过 | 站立和最低速 `forward_020` 已通过；更高速度、长时稳定、扰动恢复和其他动作尚未验证 |
 | Basketball integration | 暂缓 | 等基础 locomotion 和 whole-body physics 通过验收 |
 
-授权与证据边界：私有实验使用了通过合法项目渠道获得的 A3 行走控制器作为 teacher；公开仓库不分发该控制器、部署配置、数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书。teacher-derived 数据或模型的对外发布范围仍待确认，因此相关结果按有边界的历史实验记录处理。公开仓库未包含权重、原始日志、rollout manifest 和专用 MuJoCo evaluator；不得把三秒 `108/108` 单独概括成“100% 成功率”，必须同时给出四秒 `106/108`、可达 rollout 初态范围和未完成 sim-to-real 的限制。
+第三方与证据边界：私有实验使用了通过合法项目渠道获得的 A3 行走控制器作为 teacher；公开仓库不分发该控制器、部署配置、数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书。获取控制器不等于取得所有衍生成果的再分发许可。公开仓库未包含权重、原始日志、rollout manifest 和专用 MuJoCo evaluator；不得把三秒 `108/108` 单独概括成“100% 成功率”，必须同时给出四秒 `106/108`、可达 rollout 初态范围，以及真机仅验证站立和 `forward_020` 的边界。
 
 ## 发展过程与结果
 
@@ -46,16 +47,16 @@
 
 ### 4. 使用通过合法项目渠道获得的 A3 walking teacher
 
-私有实验环境曾使用一个通过合法项目渠道获得的 A3 行走控制器作为物理 teacher，并在 SONIC 侧增加 64 维 token 条件路径，最终统一为 29 维 A3 action。公开仓库不分发该控制器、部署实现、精确数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书；teacher-derived 数据或模型的对外发布范围仍待确认。
+私有实验环境曾使用一个通过合法项目渠道获得的 A3 行走控制器作为物理 teacher，并在 SONIC 侧增加 64 维 token 条件路径，最终统一为 29 维 A3 action。公开仓库不分发该控制器、部署实现、精确数值契约、rollout、训练数据或相关模型权重，也不代表厂商背书；获取控制器不等于取得所有衍生成果的再分发许可，相关材料公开前须检查适用条款。
 
 第一次接入仍出现前进不足和转向异常。继续检查后发现四个隐蔽接口问题：
 
 - rollout 转换器保存了 root quaternion，但 MotionLib 使用的 `pose_aa[:, 0]` 没有写入根旋转，导致 yaw 被清零；
-- 纯转向/横向命令的 gait frequency 必须与外部 teacher 一致；
+- 纯转向/横向命令的 gait frequency 必须与私有 teacher 一致；
 - action clip 已存在，但各关节的运行时 scale 没有完整复现；
 - 所谓 exact checkpoint 曾被一次优化器更新和 weight decay 改动，首帧 action error 达约 `0.0466`，并通过 last-action feedback 逐帧放大。
 
-修复 root rotvec、步频和 action scale 后，我们重新从外部模型恢复并冻结 teacher core，把 token projection 置零，再用逐帧等价性测试确认移植路径没有发生权重漂移。该恢复和契约检查代码仅保留在私有工作区。
+修复 root rotvec、步频和 action scale 后，我们重新从私有模型恢复并冻结 teacher core，把 token projection 置零，再用逐帧等价性测试确认移植路径没有发生权重漂移。该恢复和契约检查代码仅保留在私有工作区。
 
 ### 5. 验收稳定的私有物理 teacher
 
@@ -69,7 +70,7 @@
 
 ### 6. 验证 64D token 路径
 
-我们冻结外部 teacher core，只训练 token projection 100 iterations。所有候选都保持 6/6 命令稳定，说明 token 可以进入动态策略而不破坏接口；但没有候选在当前 walking 数据上超过 token 为零的 teacher 基线。
+我们冻结私有 teacher core，只训练 token projection 100 iterations。所有候选都保持 6/6 命令稳定，说明 token 可以进入动态策略而不破坏接口；但没有候选在当前 walking 数据上超过 token 为零的 teacher 基线。
 
 因此，`a3_token_yaw_fixed_step050_candidate.pt` 只作为研究候选，主基线仍是 exact-action 模型。当前结论不是 token 无效，而是数据和目标尚不足以让 token 对强外部策略产生可测收益。
 
@@ -104,7 +105,7 @@
 
 ### 9. 重建物理 teacher 数据与原生离线初始化
 
-在执行器单位、action scale、root yaw 和本体历史契约全部修正后，我们重新建立 teacher 数据，而不是继续沿用第一代失败 rollout。稳定 teacher 使用冻结的外部 walking core 和已验收 residual checkpoint；在同一物理环境中采集：
+在执行器单位、action scale、root yaw 和本体历史契约全部修正后，我们重新建立 teacher 数据，而不是继续沿用第一代失败 rollout。稳定 teacher 使用冻结的私有 walking core 和已验收 residual checkpoint；在同一物理环境中采集：
 
 - known clean：`3,900` transitions；
 - known push：`39,000` transitions；
@@ -117,7 +118,7 @@
 
 ### 10. 当前采用的 DAgger 方法
 
-DAgger 不再只收集成功 teacher 轨迹。外部 teacher 与学生读取同一个 Isaac Lab 机器人物理状态；每个控制 tick 用学生当前 token 和实际状态查询冻结 teacher，然后记录：
+DAgger 不再只收集成功 teacher 轨迹。私有 teacher 与学生读取同一个 Isaac Lab 机器人物理状态；每个控制 tick 用学生当前 token 和实际状态查询冻结 teacher，然后记录：
 
 - encoder input、FSQ token 和 native proprio；
 - teacher raw/applied action、student action 和实际混合执行 action；
@@ -204,7 +205,7 @@ Round2 的决定性变化不是更大的网络或更长的训练，而是在 **R
 - 默认观测噪声：`20/24`；关闭噪声：`21/24`；双倍噪声：`16/24`；
 - mild push：`14/24`；组合动力学随机化：`11/24`。
 
-连续无 reset 的多命令切换和大范围随机初态属于新的组合/恢复课程，不作为当前 episodic reference tracking 的准入门槛；它们不能据此否定 Round2，但也不能把 Round2 描述为连续导航或 sim-to-real 已完成。
+连续无 reset 的多命令切换和大范围随机初态属于新的组合/恢复课程，不作为当前 episodic reference tracking 的准入门槛；它们不能据此否定 Round2，但也不能把站立和 `forward_020` 的基础真机验证描述为连续导航或完整 sim-to-real 已完成。
 
 受保护的正式 checkpoint：
 
@@ -241,28 +242,28 @@ closed-loop v2 在理想化 motion-only OOD 上 token cosine 仍约 `0.066`。�
 
 ### 17. MuJoCo sim-to-sim bridge 审计
 
-第一轮 sim-to-sim 的失败不能评价 Round2，因为旧 runner 没有从 MuJoCo 当前状态重算所有 state-dependent observation，也没有完整恢复中途起点的机器人与历史状态。修复后的私有实验 bridge 从 schema-v2 数据恢复关节、root、状态历史、步态相位和上一实际执行动作，并从目标模拟器当前状态重算学生输入；每个窗口还与外部 teacher 做同初态正对照。该 teacher 的授权范围尚待核实；外部策略契约、专用 bridge、资产、checkpoint 和 rollout 均不在公开仓库分发。
+第一轮 sim-to-sim 的失败不能评价 Round2，因为旧 runner 没有从 MuJoCo 当前状态重算所有 state-dependent observation，也没有完整恢复中途起点的机器人与历史状态。修复后的私有实验 bridge 从 schema-v2 数据恢复关节、root、状态历史、步态相位和上一实际执行动作，并从目标模拟器当前状态重算学生输入；每个窗口还与私有 teacher 做同初态正对照。该控制器通过合法项目渠道获得并用于私有实验；其部署契约、专用 bridge、资产、checkpoint 和 rollout 均不在公开仓库分发，项目也不代表厂商背书。
 
-在基础六动作的 54 个 early/middle/late 四秒窗口上，外部正对照为 `54/54`，未修改 Round2 为 `52/54`；两个失败是 `forward_040` 的 middle/late，分别持续 `3.64/3.70 s`。有限 adapter、PPO 和 Dynamic Decoder 微调均未超过 Round2，因而拒绝，没有覆盖受保护 checkpoint。
+在基础六动作的 54 个 early/middle/late 四秒窗口上，私有 teacher 正对照为 `54/54`，未修改 Round2 为 `52/54`；两个失败是 `forward_040` 的 middle/late，分别持续 `3.64/3.70 s`。有限 adapter、PPO 和 Dynamic Decoder 微调均未超过 Round2，因而拒绝，没有覆盖受保护 checkpoint。
 
 ### 18. 未见动作 MuJoCo 检查与三秒多初态准入
 
 2026-09-08 使用同一受保护 Round2 补做六个未见指令：`0.25/0.35 m/s` 前进、左右 `0.15 rad/s` 慢转，以及 `0.30 m/s ± 0.15 rad/s` 曲线行走。18 个 Isaac 环境重新生成 exact-state schema-v2 rollout；审计覆盖 `10,941` 帧和 `10,923` 个连续转移，previous executed action 误差为 0，历史状态最大误差约 `7.4e-7`。
 
-每个指令使用三个独立环境和 early/middle/late 三个四秒窗口。Round2 与外部正对照从完全相同的状态启动，双方均通过未见清单全部 `54/54`。项目另行记录 **三秒可达多初态恢复门**：基础动作的两个四秒失败都发生在三秒之后，所以基础清单在三秒门下为 `54/54`；加上未见清单为 `108/108`。这些初态来自本地 rollout，其来源权利范围尚待核实，不是任意随机关节姿态；四秒合计 `106/108` 仍是必须同时披露的长时诊断，三秒指标不能单独表述为“100% 成功率”。
+每个指令使用三个独立环境和 early/middle/late 三个四秒窗口。Round2 与私有 teacher 正对照从完全相同的状态启动，双方均通过未见清单全部 `54/54`。项目另行记录 **三秒可达多初态恢复门**：基础动作的两个四秒失败都发生在三秒之后，所以基础清单在三秒门下为 `54/54`；加上未见清单为 `108/108`。这些初态来自私有 rollout，不是任意随机关节姿态，且相关材料不在公开仓库分发；四秒合计 `106/108` 仍是必须同时披露的长时诊断，三秒指标不能单独表述为“100% 成功率”。
 
 ## 当前判断
 
-项目已经形成一条技术上可执行的 A3 原生链路：A3 motion 与 64D token 表示、正确的物理/动作契约、外部 walking teacher、正确配置 step8000 Dynamic Decoder，以及两轮基于学生状态的 schema-v2 DAgger action adapter。由于外部 teacher 权利范围和公开复现材料尚不完整，这里不能把整条链描述为公众可独立复现。Round2 是当前最佳且受保护的 episodic locomotion 技术模型，不再使用错误配置 step700 或旧的 `5/6` online-tune candidate 作为主线。
+项目已经形成一条技术上可执行的 A3 原生链路：A3 motion 与 64D token 表示、正确的物理/动作契约、私有 walking teacher、正确配置 step8000 Dynamic Decoder，以及两轮基于学生状态的 schema-v2 DAgger action adapter。由于私有 teacher、权重、rollout 和专用 evaluator 不在公开仓库分发，这里不能把整条链描述为公众可独立复现。Round2 是当前最佳且受保护的 episodic locomotion 技术模型，不再使用错误配置 step700 或旧的 `5/6` online-tune candidate 作为主线。
 
 G1→A3 v2 只完成同域离线拟合，严格在线测试未通过，不进入正式控制主线。MuJoCo exact-state bridge 已通过合同审计：原 Round2 在基础与未见动作的三秒可达多初态门合计达到 `108/108`；四秒诊断分别为 `52/54` 和 `54/54`。这项结果独立于 G1 token 支线。
 
-Round2 已解决基础和局部未见参考动作在三秒可达多初态分布中的稳定执行，并完成首个受限 MuJoCo sim-to-sim 验收；它仍不是连续命令导航、任意随机初态恢复或 sim-to-real 策略。当前具体缺口是更长时间的累计平衡余量，而不是桥接或局部速度/曲率泛化尚不可用。
+Round2 已解决基础和局部未见参考动作在三秒可达多初态分布中的稳定执行，并完成首个受限 MuJoCo sim-to-sim 验收；站立和 `forward_020` 已通过基础真机验证，但它仍不是连续命令导航、任意随机初态恢复或广泛验证的 sim-to-real 策略。当前具体缺口是更长时间的累计平衡余量，而不是桥接或局部速度/曲率泛化尚不可用。
 
 ## 下一步计划
 
 1. 冻结 Round2 checkpoint、配置和 SHA，作为 `A3 episodic locomotion baseline v1`；后续实验不得原地覆盖。
-2. 冻结基础/未见 exact-state manifest、外部正对照、三秒 `108/108` 有界结果及四秒 `106/108` 诊断；任何候选必须完整保持这些结果，对外表述不得省略四秒结果和证据限制。
+2. 冻结基础/未见 exact-state manifest、私有 teacher 正对照、三秒 `108/108` 有界结果及四秒 `106/108` 诊断；任何候选必须完整保持这些结果，对外表述不得省略四秒结果和证据限制。
 3. 将 `forward_040` 三秒后的失衡作为独立长时问题，不再仅用单步 imitation loss 推动共享 adapter。
 4. G1→A3 v2 冻结为未通过在线验收的实验记录，不与 Round2 合并；后续对齐需使用真正独立的 G1/A3 同语义动作和动作级 OOD。
 5. 扩展任意随机初态、动力学参数和延迟时建立独立 curriculum 与 split，不能把组合难度混入当前固定窗口结论。

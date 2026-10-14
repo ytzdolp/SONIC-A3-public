@@ -21,9 +21,10 @@ motion representation and control stack to the Zhiyuan A3 humanoid.
 > contract, rollouts, training data, related model weights, or the private
 > evaluator needed to reproduce the results. It contains independently written
 > integration and training code together with bounded experimental records.
-> This project does not claim vendor endorsement, and public release of
-> teacher-derived data or models remains pending confirmation of the applicable
-> terms. Never quote `108/108` without also stating the four-second
+> This project does not claim vendor endorsement. Access to the controller does
+> not by itself establish permission to redistribute every derived dataset or
+> model; applicable terms must be checked before publication. Never quote
+> `108/108` without also stating the four-second
 > result (`106/108` overall), the three-second reachable-state threshold, and
 > the limited scope of the real-robot validation.
 
@@ -63,10 +64,10 @@ frozen, correctly configured A3 Dynamic Decoder plus a zero-initialized,
 | A3 Encoder + Kinematic Decoder | 64D token reconstruction independently validated |
 | A3 walking controller used as a private teacher | Obtained through a legitimate project channel; no controller, private contract, rollout, or derived model is released |
 | Native Dynamic Decoder backbone | Correct-config step8000 selected; 2/6 alone |
-| Round2 known locomotion | 6/6 at seed0; 23/24 across four seeds |
-| Round2 held-out locomotion | 15/24 across four seeds |
+| Round2 Isaac Lab known full episodes | 6/6 at seed0; 23/24 across four seeds |
+| Round2 Isaac Lab held-out full episodes | 15/24 across four seeds |
 | G1-to-A3 token experiment | Offline same-domain fit obtained; strict online test rejected |
-| MuJoCo sim-to-sim | Four seconds: known 52/54, held-out 54/54; three-second reachable multi-initial gate: 108/108 |
+| MuJoCo exact-state rollout windows | Four seconds: known 52/54, held-out 54/54; three-second reachable multi-initial gate: 108/108 |
 | Continuous navigation / random recovery | Reachable multi-initial 3 s accepted; arbitrary-state recovery not trained |
 | Real-robot validation | Basic standing and `forward_020` (nominally `0.20 m/s`) passed; broader speeds, durations, disturbances, recovery, and other motions remain unvalidated |
 | Basketball task | Deferred |

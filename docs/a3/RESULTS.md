@@ -11,9 +11,10 @@ does not include the relevant weights, raw logs, rollout manifests, or the
 contract-specific MuJoCo evaluator, so a third party cannot independently
 reproduce the tables from this repository alone. Private experiments used an
 A3 walking controller obtained through a legitimate project channel as a
-teacher, but the scope for public release of teacher-derived data or models has
-not been documented here. The controller and related private artifacts are not
-redistributed, and the project does not claim vendor endorsement.
+teacher. The controller, deployment configuration, numerical contract,
+rollouts, training data, and related weights are not redistributed, and the
+project does not claim vendor endorsement. Access to the controller does not by
+itself establish redistribution permission for every derived artifact.
 
 ## Acceptance policy
 
@@ -62,7 +63,16 @@ Accepted closed-loop results:
 
 Round2 is accepted as reset-per-episode reference tracking. Its bounded
 MuJoCo multi-initial result is recorded below. It is not a continuous
-command-navigation, arbitrary-state-recovery, or sim-to-real policy.
+command-navigation, arbitrary-state-recovery, or broadly validated sim-to-real
+policy. Basic standing and `forward_020` have passed limited real-robot
+validation; broader conditions remain unvalidated.
+
+## Limited real-robot validation
+
+Standing and the lowest-speed `forward_020` command (nominally `0.20 m/s`) have
+passed a basic real-robot validation. This result is self-reported from the
+private workspace and does not cover higher speeds, long-duration stability,
+disturbances, recovery, continuous navigation, or the remaining motions.
 
 ## G1-to-A3 walking-domain alignment v2
 
@@ -116,12 +126,12 @@ universal G1/A3 token space.
 After correcting the private-workspace state/history bridge, the protected
 Round2 and the private teacher positive control were run from identical
 rollout-derived joint, root, history, phase, and previous-action states. The
-public repository does not distribute that external policy contract, the robot
+public repository does not distribute that private controller contract, the robot
 assets, checkpoints, rollouts, or the contract-specific bridge.
 
 Four-second diagnostic results:
 
-| Manifest | Protected Round2 | External positive control |
+| Manifest | Protected Round2 | Private teacher positive control |
 |---|---:|---:|
 | Six known commands | 52/54 | 54/54 |
 | Six held-out commands | 54/54 | 54/54 |
@@ -136,12 +146,13 @@ four-second diagnostic is **106/108** overall. Under the separate three-second
 reachable multi-initial gate, Round2 passes **108/108**
 windows across both manifests. The starts are physically reached rollout states,
 not arbitrary random poses. This acceptance does not establish continuous
-navigation, long-horizon recovery, or sim-to-real readiness.
+navigation, long-horizon recovery, or broader sim-to-real readiness beyond the
+limited standing and `forward_020` real-robot validation above.
 
 Do not report the three-second result as an unqualified "100% success rate."
 Any summary must include the four-second result, bounded initial-state and time
-horizon, unavailable public reproduction artifacts, and lack of sim-to-real
-validation.
+horizon, unavailable public reproduction artifacts, and the limited scope of
+the real-robot validation.
 
 ## Reproduction entry points
 

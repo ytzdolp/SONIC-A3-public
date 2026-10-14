@@ -1,11 +1,9 @@
-<div align="center">
-
-  <img src="media/groot_wbc.png" width="800" alt="GEAR SONIC Header">
-
-  <!-- --- -->
-  
-  
-</div>
+> **SONIC-A3-public snapshot note:** this file preserves the NVIDIA upstream
+> project description for attribution and technical context. Demo media and
+> large upstream assets are intentionally not duplicated in this public
+> snapshot. View the complete upstream materials at
+> [NVlabs/GR00T-WholeBodyControl](https://github.com/NVlabs/GR00T-WholeBodyControl)
+> and the [GEAR-SONIC project page](https://nvlabs.github.io/GEAR-SONIC/).
 
 <div align="center">
 
@@ -70,14 +68,11 @@ This is the codebase for the **GR00T Whole-Body Control (WBC)** projects. It hos
     <a href="https://nvlabs.github.io/GR00T-WholeBodyControl/"><strong>Docs</strong></a>
   </p>
 
-<div align="center">
-  <img src="docs/source/_static/sonic-preview-gif-480P.gif" width="800" >
-  
-</div>
-
 SONIC is a humanoid behavior foundation model that gives robots a core set of motor skills learned from large-scale human motion data. Rather than building separate controllers for predefined motions, SONIC uses motion tracking as a scalable training task, enabling a single unified policy to produce natural, whole-body movement and support a wide range of behaviors — from walking and crawling to teleoperation and multi-modal control. It is designed to generalize beyond the motions it has seen during training and to serve as a foundation for higher-level planning and interaction.
 
-In this repo, we release SONIC's training code, deployment framework, model checkpoints, and teleoperation stack for data collection.
+The upstream repository releases SONIC's training code, deployment framework,
+model checkpoints, and teleoperation stack for data collection. This public
+SONIC-A3 snapshot does not duplicate all upstream binaries or media.
 
 ## Model Card
 
@@ -158,97 +153,27 @@ See [Downloading Model Checkpoints](docs/source/getting_started/download_models.
 
 SONIC supports real-time whole-body teleoperation via PICO VR headset, enabling natural human-to-robot motion transfer for data collection and interactive control.
 
-<div align="center">
-  <img src="docs/source/_static/sonic_low_latency_demo.gif" width="640" alt="SONIC Low Latency whole-body teleoperation and ground pickup">
-</div>
-
 <p align="center"><em><strong>SONIC Low Latency:</strong> 3-point VR teleoperation with whole-body tracking and a successful ground pickup.</em></p>
 
-This repo can also drive the headset over Isaac Teleop / CloudXR by launching `gear_sonic/scripts/pico_manager_thread_server.py --input-source isaac-teleop`. The streamer hosts the CloudXR runtime in-process via `isaacteleop[cloudxr]` — no separate publisher container required. That path is currently documented and supported only for **G1 with a Thor backpack**. The Isaac Teleop bring-up steps are documented in [`docs/source/tutorials/isaac_teleop_publisher_setup.md`](docs/source/tutorials/isaac_teleop_publisher_setup.md).
+The corresponding NVIDIA demo is available from the
+[GEAR-SONIC project page](https://nvlabs.github.io/GEAR-SONIC/); its media is
+not bundled in this public snapshot.
 
-<div align="center">
-<table>
-<tr>
-<td align="center"><b>Walking</b></td>
-<td align="center"><b>Running</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/teleop_walking.gif" width="400"></td>
-<td align="center"><img src="media/teleop_running.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Sideways Movement</b></td>
-<td align="center"><b>Kneeling</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/teleop_sideways.gif" width="400"></td>
-<td align="center"><img src="media/teleop_kneeling.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Getting Up</b></td>
-<td align="center"><b>Jumping</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/teleop_getup.gif" width="400"></td>
-<td align="center"><img src="media/teleop_jumping.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Bimanual Manipulation</b></td>
-<td align="center"><b>Object Hand-off</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/teleop_bimanual.gif" width="400"></td>
-<td align="center"><img src="media/teleop_switch_hands.gif" width="400"></td>
-</tr>
-</table>
-</div>
+The upstream code can also drive the headset over Isaac Teleop / CloudXR by launching `gear_sonic/scripts/pico_manager_thread_server.py --input-source isaac-teleop`. The streamer hosts the CloudXR runtime in-process via `isaacteleop[cloudxr]` — no separate publisher container required. That path is currently documented and supported only for **G1 with a Thor backpack**. The Isaac Teleop bring-up steps are documented in [`docs/source/tutorials/isaac_teleop_publisher_setup.md`](docs/source/tutorials/isaac_teleop_publisher_setup.md).
+
+Upstream demonstrations cover walking, running, sideways movement, kneeling,
+getting up, jumping, bimanual manipulation, and object hand-off. See the
+[official GEAR-SONIC materials](https://nvlabs.github.io/GEAR-SONIC/) for the
+associated videos; they are not evidence of SONIC-A3 results.
 
 ## Kinematic Planner
 
 SONIC includes a kinematic planner for real-time locomotion generation — choose a movement style, steer with keyboard/gamepad, and adjust speed and height on the fly.
 
-<div align="center">
-<table>
-<tr>
-<td align="center" colspan="2"><b>In-the-Wild Navigation</b></td>
-</tr>
-<tr>
-<td align="center" colspan="2"><img src="media/planner/planner_in_the_wild_navigation.gif" width="800"></td>
-</tr>
-<tr>
-<td align="center"><b>Run</b></td>
-<td align="center"><b>Happy</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/planner/planner_run.gif" width="400"></td>
-<td align="center"><img src="media/planner/planner_happy.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Stealth</b></td>
-<td align="center"><b>Injured</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/planner/planner_stealth.gif" width="400"></td>
-<td align="center"><img src="media/planner/planner_injured.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Kneeling</b></td>
-<td align="center"><b>Hand Crawling</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/planner/planner_kneeling.gif" width="400"></td>
-<td align="center"><img src="media/planner/planner_hand_crawling.gif" width="400"></td>
-</tr>
-<tr>
-<td align="center"><b>Elbow Crawling</b></td>
-<td align="center"><b>Boxing</b></td>
-</tr>
-<tr>
-<td align="center"><img src="media/planner/planner_elbow_crawling.gif" width="400"></td>
-<td align="center"><img src="media/planner/planner_boxing.gif" width="400"></td>
-</tr>
-</table>
-</div>
+Upstream planner demonstrations include navigation, running, styled walking,
+kneeling, crawling, and boxing. The complete media gallery remains available
+from the [official upstream repository](https://github.com/NVlabs/GR00T-WholeBodyControl)
+and is not duplicated here.
 
 ## SONIC Training
 
@@ -301,7 +226,7 @@ For the full guide including multi-node training, evaluation, ONNX export, and S
 
 ## What's Included
 
-This release includes:
+The complete upstream release includes:
 
 - **`gear_sonic_deploy`**: C++ inference stack for deploying SONIC policies on real hardware
 - **`gear_sonic`**: Full SONIC training stack — PPO training, data processing pipeline, and configuration system for training on Bones-SEED and custom motion datasets
@@ -309,9 +234,10 @@ This release includes:
 
 ### Setup
 
-> **Git LFS required.** This repo contains large binary assets (meshes, ONNX
-> models). Without Git LFS, you will get small pointer files instead of actual
-> data, causing silent failures. Install Git LFS first if you don't have it:
+> **For a complete upstream checkout, Git LFS is required.** The upstream
+> repository contains large binary assets (meshes, ONNX models). Without Git
+> LFS, you will get small pointer files instead of actual data, causing silent
+> failures. Install Git LFS first if you don't have it:
 > `sudo apt install git-lfs && git lfs install`
 >
 > MotionBricks pretrained checkpoints are skipped by default to avoid an extra
@@ -416,14 +342,19 @@ For questions and issues, please contact the GEAR WBC team at [gear-wbc@nvidia.c
   <a href="motionbricks/README.md"><strong>Subproject README</strong></a>
 </p>
 
-<div align="center">
-  <img src="motionbricks/assets/gifs/teaser_animation.gif" width="400">
-  <img src="motionbricks/assets/gifs/teaser_robotics.gif" width="400">
-</div>
+MotionBricks is a real-time generative framework that transforms interactive motion control for animation and robotics. It combines a large-scale latent backbone with intuitive "smart primitives" to deliver high-quality, zero-shot motion synthesis at 15,000 FPS — complementing the tracking-based GEAR-SONIC controllers in the upstream repository.
 
-MotionBricks is a real-time generative framework that transforms interactive motion control for animation and robotics. It combines a large-scale latent backbone with intuitive "smart primitives" to deliver high-quality, zero-shot motion synthesis at 15,000 FPS — complementing the tracking-based GEAR-SONIC controllers in this repo.
+The MotionBricks teaser media is available on its
+[upstream project page](https://nvlabs.github.io/motionbricks/) and is not
+bundled in this public snapshot.
 
-This preview release ships an interactive G1 demo (keyboard-driven, MuJoCo viewer), pretrained checkpoints (VQVAE · pose · root), a synthetic training pipeline, and motion-representation docs. Its pretrained checkpoints are opt-in for monorepo clones; run `git lfs pull --include="motionbricks/out/**" --exclude=""` from the repo root before using the demo. A full release — fully embedded in the GEAR-SONIC pipeline — is targeted for approximately one month out. See [`motionbricks/README.md`](motionbricks/README.md) for setup, demo, and training instructions.
+The upstream preview release ships an interactive G1 demo (keyboard-driven,
+MuJoCo viewer), pretrained checkpoints (VQVAE · pose · root), a synthetic
+training pipeline, and motion-representation docs. Those checkpoints are not
+bundled in this public snapshot. See the
+[upstream repository](https://github.com/NVlabs/GR00T-WholeBodyControl) for the
+complete setup and assets, or [`motionbricks/README.md`](motionbricks/README.md)
+for the source-only snapshot notes.
 
 ## Decoupled WBC
 

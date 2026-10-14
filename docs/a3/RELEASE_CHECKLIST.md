@@ -18,7 +18,7 @@ Before every push:
       and redistribution terms have been checked
 - [ ] README describes incomplete features honestly
 - [ ] `108/108` is never reported without the four-second `106/108`, bounded
-      three-second setup, unavailable public evidence, and sim-to-real limit
+      three-second setup, unavailable public evidence, and limited real-robot scope
 - [ ] installation commands tested in a clean environment
 - [ ] current source files compile
 - [ ] README/project progress match accepted checkpoints and current capability boundaries

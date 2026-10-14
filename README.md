@@ -9,7 +9,10 @@ motion representation and control stack to the Zhiyuan A3 humanoid.
 > and 54/54 held-out-command four-second windows; under the three-second
 > reachable multi-initial recovery gate it passes all 108/108 windows.
 > Continuous navigation, arbitrary-state recovery, broad whole-body token
-> alignment, and real-robot deployment are not complete.
+> alignment, and full real-robot deployment are not complete. Standing and the
+> lowest-speed forward command (`forward_020`, nominally `0.20 m/s`) have passed
+> a basic real-robot validation; higher speeds, longer horizons, disturbances,
+> recovery, and the remaining motions have not.
 
 > **Evidence and rights boundary:** these are self-reported private-workspace
 > results. Private experiments used an A3 walking controller obtained through
@@ -22,7 +25,7 @@ motion representation and control stack to the Zhiyuan A3 humanoid.
 > teacher-derived data or models remains pending confirmation of the applicable
 > terms. Never quote `108/108` without also stating the four-second
 > result (`106/108` overall), the three-second reachable-state threshold, and
-> the lack of sim-to-real validation.
+> the limited scope of the real-robot validation.
 
 ## Relationship to upstream
 
@@ -40,6 +43,15 @@ NVIDIA or Zhiyuan Robotics.
 The original upstream README is preserved as
 [README_UPSTREAM.md](README_UPSTREAM.md).
 
+### Scope compared with upstream SONIC
+
+SONIC-A3 is trained and evaluated on a small, task-specific A3 dataset rather
+than the broad motion corpus used to build the upstream SONIC system. The
+current A3 implementation supports selected reference-motion reconstruction
+and a bounded set of episodic locomotion commands. It is not a general-purpose
+whole-body behavior model: arbitrary motions, continuous command navigation,
+wide initial-state recovery, and cross-task generalization are not established.
+
 ## Current result
 
 The current protected baseline is **A3 episodic locomotion Round2**. It uses a
@@ -56,7 +68,7 @@ frozen, correctly configured A3 Dynamic Decoder plus a zero-initialized,
 | G1-to-A3 token experiment | Offline same-domain fit obtained; strict online test rejected |
 | MuJoCo sim-to-sim | Four seconds: known 52/54, held-out 54/54; three-second reachable multi-initial gate: 108/108 |
 | Continuous navigation / random recovery | Reachable multi-initial 3 s accepted; arbitrary-state recovery not trained |
-| Sim-to-real | Not validated |
+| Real-robot validation | Basic standing and `forward_020` (nominally `0.20 m/s`) passed; broader speeds, durations, disturbances, recovery, and other motions remain unvalidated |
 | Basketball task | Deferred |
 
 The protected Round2 checkpoint is not distributed in this repository. Its

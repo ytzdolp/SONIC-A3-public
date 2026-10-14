@@ -114,7 +114,7 @@ universal G1/A3 token space.
 ## Accepted with bounded scope: MuJoCo sim-to-sim
 
 After correcting the private-workspace state/history bridge, the protected
-Round2 and the external teacher positive control were run from identical
+Round2 and the private teacher positive control were run from identical
 rollout-derived joint, root, history, phase, and previous-action states. The
 public repository does not distribute that external policy contract, the robot
 assets, checkpoints, rollouts, or the contract-specific bridge.

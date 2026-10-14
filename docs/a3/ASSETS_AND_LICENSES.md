@@ -55,8 +55,9 @@ applicable rights. This preserves the general Dynamic Decoder, DAgger-dataset,
 and adapter methods without publishing an external policy contract. Do not
 describe these project-authored methods as vendor code.
 
-See [EXTERNAL_TEACHER_RIGHTS.md](EXTERNAL_TEACHER_RIGHTS.md) for the unresolved
-rights checklist and the restrictions that apply meanwhile.
+See
+[THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md](THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md)
+for the recorded source and public-release boundary.
 
 ## Third-party source code retained in the tree
 

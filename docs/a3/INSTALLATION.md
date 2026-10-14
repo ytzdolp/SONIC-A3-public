@@ -100,13 +100,13 @@ sample_data/
 Keep `sample_data/` ignored. Prefer a manifest containing filenames, hashes,
 frame rates, joint order, provenance, and license instead of committing the data.
 
-The public snapshot does not contain the external walking teacher or its
-numerical observation/action contract. If you have independently verified that
-your permission covers rollout generation and model training, record its joint
-order and runtime action scale alongside each rollout. Public offline trainers
-read that metadata from the rollout instead of assuming a vendor-specific
-contract. The teacher used in the historical SONIC-A3 experiments is still
-under the rights review documented in `EXTERNAL_TEACHER_RIGHTS.md`.
+The public snapshot does not contain the private walking teacher or its
+numerical observation/action contract. Record joint order and runtime action
+scale alongside each rollout only when the applicable terms permit that use.
+Public offline trainers read that metadata from the rollout instead of assuming
+a vendor-specific contract. The source and public-release boundary for the
+teacher used in the historical SONIC-A3 experiments is documented in
+`THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md`.
 
 ## 6. Verify source and assets
 

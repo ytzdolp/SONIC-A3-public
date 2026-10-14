@@ -14,8 +14,8 @@ Before every push:
 - [ ] upstream `LICENSE` and attribution retained
 - [ ] HuMoR and PyTorch3D notices and complete license texts retained
 - [ ] A3 assets excluded unless redistribution permission is documented
-- [ ] external-teacher permission is documented for each claimed use, or all
-      affected claims/artifacts remain explicitly provisional and excluded
+- [ ] third-party artifacts remain excluded unless their applicable publication
+      and redistribution terms have been checked
 - [ ] README describes incomplete features honestly
 - [ ] `108/108` is never reported without the four-second `106/108`, bounded
       three-second setup, unavailable public evidence, and sim-to-real limit
@@ -43,5 +43,5 @@ Before changing the repository to public:
 - [ ] verify the project does not imply vendor endorsement
 - [ ] confirm the exact external walking contract remains absent from source,
       configs, docs, data, and Git history
-- [ ] archive a private, reviewable record of the external teacher provider's
-      permission scope before publishing teacher-derived artifacts or claims
+- [ ] retain a private, reviewable source record and check applicable terms
+      before publishing teacher-derived datasets or models

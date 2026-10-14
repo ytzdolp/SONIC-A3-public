@@ -11,7 +11,7 @@
 - upstream license and legal notices, plus project-specific citation and
   security files;
 - A3 introduction, progress, installation, asset-license, and release documents;
-- external-teacher rights status and third-party HuMoR/PyTorch3D licenses;
+- third-party source/publication scope and HuMoR/PyTorch3D licenses;
 - source/release validation tools.
 
 ## Added for the second snapshot

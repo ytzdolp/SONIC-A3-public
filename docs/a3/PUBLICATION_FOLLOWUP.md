@@ -3,18 +3,18 @@
 This is an evidence checklist, not a certification of compliance.
 Do not mark an item complete merely because a disclaimer was added.
 
-## External teacher rights — owner/provider action
+## Third-party source and publication scope — owner/provider action
 
-- [ ] Identify the provider and exact actor/version used.
-- [ ] Obtain written scope for rollout/label generation and student distillation.
-- [ ] Confirm whether source, performance tables, videos, and derived checkpoints may be published.
-- [ ] Confirm research/commercial use, required attribution, and confidentiality restrictions.
+- [ ] Privately retain the provider and exact controller/version record.
+- [ ] Check the applicable terms before publishing controller-derived datasets or models.
+- [ ] Confirm required attribution and any confidentiality restrictions for each artifact released.
 - [ ] Check whether work produced during the laboratory internship needs laboratory approval.
-- [ ] Keep confidential correspondence outside Git; record a non-confidential decision in
-      [EXTERNAL_TEACHER_RIGHTS.md](EXTERNAL_TEACHER_RIGHTS.md).
+- [ ] Keep confidential correspondence outside Git; record only a non-confidential scope in
+      [THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md](THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md).
 
-Until confirmed, keep affected claims provisional. Permission to access an actor
-does not establish permission for all subsequent uses.
+The controller was obtained through a legitimate project channel for private
+experiments. That access does not by itself establish redistribution permission
+for every derived artifact, and the project does not represent vendor endorsement.
 
 ## Experiment evidence — experiment owner action
 
@@ -25,7 +25,7 @@ does not establish permission for all subsequent uses.
 - [ ] Identify precisely which code, experiments, and debugging were personally performed.
 - [ ] Only publish artifacts approved for disclosure. Do not upload restricted assets merely
       to make reproduction easier.
-- [ ] For a publicly reproducible example, use a teacher and dataset with verified permissions.
+- [ ] For a publicly reproducible example, use a teacher and dataset whose applicable terms have been checked.
 
 See [RESULTS.md](RESULTS.md) for the current evidence boundary. Lack of public
 artifacts is not evidence of fabrication, but the tables are not independently

@@ -23,9 +23,11 @@ NVIDIA upstream weights are governed by the NVIDIA Open Model License included
 in `LICENSE`; that license must not be assumed to cover locally trained or
 third-party models.
 
-The externally supplied A3 walking teacher has an unresolved permission scope.
-Do not publish its rollouts, derived checkpoints, or teacher-derived claims as
-authorized until the review in [external teacher rights](https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/EXTERNAL_TEACHER_RIGHTS.md) is complete.
+The A3 walking controller used in private experiments was obtained through a
+legitimate project channel. It and its private artifacts are not distributed
+here, and the project does not represent vendor endorsement. Access does not by
+itself establish redistribution permission for every derived artifact; see the
+[third-party source and public-release scope](https://github.com/ytzdolp/SONIC-A3-public/blob/main/docs/a3/THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md).
 
 For upstream-specific licensing questions, consult the upstream repository.
 Project maintainers cannot grant rights to third-party code, models, robot

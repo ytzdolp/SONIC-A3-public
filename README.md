@@ -79,9 +79,9 @@ research-workspace SHA-256 is:
 ```
 
 Round2 depends on teacher-derived training data. Its technical metrics remain
-useful as experiment records, but public use or release of derived artifacts is
-pending the rights review in
-[docs/a3/EXTERNAL_TEACHER_RIGHTS.md](docs/a3/EXTERNAL_TEACHER_RIGHTS.md).
+useful as experiment records, while any release of related data or models must
+follow the third-party boundary in
+[docs/a3/THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md](docs/a3/THIRD_PARTY_SOURCE_AND_PUBLICATION_SCOPE.md).
 
 ### G1-to-A3 token experiment
 
@@ -210,7 +210,8 @@ When publishing models separately, record at least:
 ## Publication follow-up
 
 See [the remaining evidence and hosting checklist](docs/a3/PUBLICATION_FOLLOWUP.md)
-for teacher rights, evaluation records, and previously published objects.
+for third-party publication scope, evaluation records, and previously
+published objects.
 
 ## License and attribution
 

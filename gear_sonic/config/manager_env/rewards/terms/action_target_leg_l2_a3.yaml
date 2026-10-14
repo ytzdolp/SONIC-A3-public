@@ -1,0 +1,11 @@
+action_target_leg_l2:
+  _target_: isaaclab.managers.RewardTermCfg
+  func: gear_sonic.envs.manager_env.mdp:action_target_leg_l2
+  weight: -30.0
+  params:
+    command_name: "motion"
+    action_name: "joint_pos"
+    joint_names:
+      - ".*_hip_.*_joint"
+      - ".*_knee_joint"
+      - ".*_ankle_.*_joint"

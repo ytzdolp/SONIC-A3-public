@@ -1,0 +1,18 @@
+# Push-only curriculum: disturbances arrive after the external teacher's
+# history has synchronized with the physical robot state.
+defaults:
+  - terms/push_robot@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.events.EventCfg
+
+push_robot:
+  mode: "interval"
+  interval_range_s: [4.0, 6.0]
+  params:
+    velocity_range:
+      x: [-0.20, 0.20]
+      y: [-0.20, 0.20]
+      z: [0.0, 0.0]
+      roll: [-0.15, 0.15]
+      pitch: [-0.15, 0.15]
+      yaw: [-0.20, 0.20]

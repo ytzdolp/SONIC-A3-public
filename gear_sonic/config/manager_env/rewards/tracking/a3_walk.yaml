@@ -1,0 +1,27 @@
+defaults:
+  - terms/tracking_anchor_pos@_here_
+  - terms/tracking_anchor_ori@_here_
+  - terms/tracking_relative_body_pos@_here_
+  - terms/tracking_relative_body_ori@_here_
+  - terms/tracking_body_linvel@_here_
+  - terms/tracking_body_angvel@_here_
+  - terms/action_rate_l2@_here_
+  - terms/joint_limit@_here_
+  - terms/undesired_contacts@_here_
+  - terms/anti_shake_ang_vel@_here_
+  - terms/tracking_vr_5point_local@_here_
+  - terms/feet_acc@_here_
+  - terms/upright_penalty_a3@_here_
+  - terms/anchor_height_penalty@_here_
+  - terms/base_ang_vel_xy_penalty@_here_
+  - terms/foot_slip_a3@_here_
+  - terms/leg_joint_vel_a3@_here_
+  - terms/leg_joint_acc_a3@_here_
+  - terms/tracking_anchor_xy_a3@_here_
+  - terms/tracking_anchor_linvel_a3@_here_
+  - terms/tracking_feet_pos_a3@_here_
+  - terms/tracking_joint_pos_a3@_here_
+  - terms/tracking_action_target_a3@_here_
+  - terms/action_target_leg_l2_a3@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.rewards.RewardsCfg

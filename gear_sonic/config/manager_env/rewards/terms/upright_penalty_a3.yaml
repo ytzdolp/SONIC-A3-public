@@ -1,0 +1,7 @@
+upright_penalty:
+  _target_: isaaclab.managers.RewardTermCfg
+  func: gear_sonic.envs.manager_env.mdp:upright_penalty
+  weight: -3.0
+  params:
+    command_name: "motion"
+    body_names: ["pelvis", "torso_link"]

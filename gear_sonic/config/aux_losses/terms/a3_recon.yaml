@@ -1,0 +1,4 @@
+a3_recon:
+  _target_: gear_sonic.trl.losses.token_losses.RobotReconLoss
+  decoder_name: a3_kin
+  loss_type: mse

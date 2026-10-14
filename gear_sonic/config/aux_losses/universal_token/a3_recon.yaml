@@ -1,0 +1,9 @@
+# @package algo.config.actor.backbone
+
+defaults:
+  - terms/a3_recon@aux_loss_func
+  - terms/a3_action_bc@aux_loss_func
+
+aux_loss_coef:
+  a3_recon: 0.1
+  a3_action_bc: 5.0

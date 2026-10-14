@@ -1,0 +1,25 @@
+SONIC-A3 is an unofficial research derivative of NVlabs/GR00T-WholeBodyControl.
+
+Original project:
+https://github.com/NVlabs/GR00T-WholeBodyControl
+
+Original NVIDIA copyright and license terms are retained in LICENSE and in
+individual source-file headers. A3-specific additions are research work in
+progress and are not endorsed by NVIDIA or Zhiyuan Robotics.
+
+The robot assets expected by the A3 integration are not bundled. Public A3/A3U
+models are available separately from AgibotTech/A3-A3U-robot-model under the
+Mulan Permissive Software License v2. Users must preserve that repository's
+license and notices when copying or redistributing its model files.
+
+Third-party source retained in this repository includes:
+
+- HuMoR-derived body-model utilities, Copyright (c) 2021 Davis Rempe, MIT
+  License. See `legal/MIT License - HuMoR.txt`.
+- PyTorch3D-derived rotation conversions, Copyright (c) Meta Platforms, Inc.
+  and affiliates, BSD 3-Clause License. See
+  `legal/BSD License - PyTorch3D.txt`.
+
+An unused mapping function copied from SMPLify-X was removed from the current
+tree because its redistribution permission was not established. SMPL-family
+model files are not distributed here and remain subject to their own terms.

@@ -1,0 +1,6 @@
+base_ang_vel_xy_penalty:
+  _target_: isaaclab.managers.RewardTermCfg
+  func: gear_sonic.envs.manager_env.mdp:base_ang_vel_xy_penalty
+  weight: -0.15
+  params:
+    command_name: "motion"

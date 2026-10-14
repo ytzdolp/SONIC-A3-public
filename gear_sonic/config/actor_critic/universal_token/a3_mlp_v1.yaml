@@ -1,0 +1,35 @@
+# @package _global_
+
+defaults:
+  - critics/mlp@algo.config.critic
+  - quantizers/fsq@algo.config.actor.backbone.quantizer
+  - encoders/a3_mf_mlp@algo.config.actor.backbone.encoders
+  - decoders/a3_dyn_mlp@algo.config.actor.backbone.decoders
+  - decoders/a3_kin_mf_mlp@algo.config.actor.backbone.decoders
+
+manager_env:
+  commands:
+    motion:
+      native_encoder_name: a3
+      encoder_sample_probs:
+        a3: 1.0
+
+algo:
+  config:
+    actor:
+      _target_: gear_sonic.trl.modules.actor_critic_modules.Actor
+      running_mean_std: false
+      input_obs_dict: true
+      has_aux_loss: true
+      backbone:
+        _target_: gear_sonic.trl.modules.universal_token_modules.UniversalTokenModule
+        num_future_frames: ${manager_env.commands.motion.num_future_frames}
+        proprioception_features: ["actor_obs"]
+        encoder_sample_probs: ${manager_env.commands.motion.encoder_sample_probs}
+        native_encoder_name: a3
+        action_decoder_name: a3_dyn
+        kinematic_decoder_name: a3_kin
+        reencode_smpl_g1_recon: false
+        num_fsq_levels: 32
+        fsq_level_list: 32
+        max_num_tokens: 2

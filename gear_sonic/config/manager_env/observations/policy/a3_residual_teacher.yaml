@@ -1,0 +1,26 @@
+defaults:
+  - ../terms/gravity_dir@_here_
+  - ../terms/base_ang_vel@_here_
+  - ../terms/joint_pos@_here_
+  - ../terms/joint_vel@_here_
+  - ../terms/actions@_here_
+  - ../terms/command_multi_future@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.observations.PolicyCfg
+enable_corruption: true
+concatenate_terms: true
+
+gravity_dir:
+  history_length: ${actor_prop_history_length}
+
+base_ang_vel:
+  history_length: ${actor_prop_history_length}
+
+joint_pos:
+  history_length: ${actor_prop_history_length}
+
+joint_vel:
+  history_length: ${actor_prop_history_length}
+
+actions:
+  history_length: ${actor_actions_history_length}

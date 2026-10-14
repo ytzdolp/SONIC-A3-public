@@ -1,0 +1,114 @@
+# @package _global_
+# Stage-3 A3 privileged joint-space residual teacher.
+# The policy outputs a bounded correction; the action term adds it to q_ref-q_default.
+
+defaults:
+  - /algo: ppo_im_phc
+  - /manager_env: base_env
+  - /callbacks/read_eval
+  - /callbacks/im_resample
+  - override /trainer: trl
+  - override /actor_critic: mlp
+  - override /manager_env/actions: tracking/a3_reference_residual
+  - override /manager_env/observations/policy: a3_residual_teacher
+  - override /manager_env/observations/critic: privileged_mf_hist
+  - override /manager_env/events: tracking/a3_stand_deterministic
+  - override /manager_env/terminations: tracking/a3_walk_bootstrap
+  - override /manager_env/rewards: tracking/a3_walk
+
+use_manager_env: true
+use_wandb: false
+project_name: TRL_A3_Residual_Teacher
+exp_base: ${hydra:runtime.choices.exp}
+exp_var: test
+experiment_name: ${exp_base}_${exp_var}
+experiment_dir: ${base_dir}/${project_name}/${experiment_name}-${timestamp}
+
+num_envs: 2048
+actor_prop_history_length: 10
+actor_actions_history_length: 10
+critic_prop_history_length: 10
+critic_actions_history_length: 10
+
+manager_env:
+  config:
+    robot:
+      type: a3_walk
+    terrain_type: plane
+  actions:
+    joint_pos:
+      residual_scale: 0.25
+  rewards:
+    action_rate_l2:
+      weight: -0.05
+    residual_action_l2:
+      _target_: isaaclab.managers.RewardTermCfg
+      func: gear_sonic.envs.manager_env.mdp:residual_action_l2
+      weight: -0.01
+      params:
+        action_name: "joint_pos"
+    upright_penalty:
+      weight: -2.0
+    anchor_height_penalty:
+      weight: -4.0
+    base_ang_vel_xy_penalty:
+      weight: -0.1
+    # The policy action is a residual, not the full q_ref-q_default target.
+    # These two imitation terms are defined for absolute-action policies and
+    # would incorrectly make the residual duplicate the reference trajectory.
+    tracking_action_target:
+      weight: 0.0
+    action_target_leg_l2:
+      weight: 0.0
+  commands:
+    motion:
+      # Keep the local key-point objective sensitive to swing-foot motion.
+      reward_point_body:
+        [
+          "torso_link",
+          "left_wrist_yaw_link",
+          "right_wrist_yaw_link",
+          "left_ankle_roll_link",
+          "right_ankle_roll_link",
+        ]
+      reward_point_body_offset:
+        [
+          [0.0, 0.0, 0.5],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+        ]
+      num_future_frames: 10
+      dt_future_ref_frames: 0.1
+      freeze_frame_aug: true
+      motion_lib_cfg:
+        # Basketball shot is intentionally excluded here: its source reference
+        # fixes a deep-squat lower body and root height while commanding very
+        # fast upper-body motion. Keep it for kinematic representation work,
+        # but do not use it as a physics teacher target until re-retargeted.
+        motion_file: sample_data/a3_human_like_teacher/a3_sonic_env_forward_motionlib.pkl
+        smpl_motion_file: dummy
+        smpl_y_up: true
+        asset:
+          assetFileName: "a3.xml"
+      start_from_first_frame: true
+
+algo:
+  trl:
+    report_to: tensorboard
+    logging_steps: 1
+  config:
+    num_steps_per_env: 24
+    num_learning_iterations: 2000
+    save_interval: 50
+    init_at_random_ep_len: false
+    init_noise_std: 0.08
+    actor_learning_rate: 5.0e-5
+    critic_learning_rate: 5.0e-4
+    entropy_coef: 0.005
+    adaptive_lr_max: 1.0e-4
+    use_clampped_std: true
+    std_clamp_min: 0.01
+    std_clamp_max: 0.35
+    max_grad_norm: 0.5

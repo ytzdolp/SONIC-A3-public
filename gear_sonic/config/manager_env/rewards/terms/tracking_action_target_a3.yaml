@@ -1,0 +1,8 @@
+tracking_action_target:
+  _target_: isaaclab.managers.RewardTermCfg
+  func: gear_sonic.envs.manager_env.mdp:tracking_action_target_error
+  weight: 30.0
+  params:
+    command_name: "motion"
+    action_name: "joint_pos"
+    std: 0.20

@@ -1,0 +1,11 @@
+# A3-native tokenizer.  The BC target is exposed to the auxiliary loss but is
+# deliberately absent from the A3 encoder input list.
+defaults:
+  - ../terms/encoder_index@_here_
+  - ../terms/command_multi_future_nonflat@_here_
+  - ../terms/motion_anchor_ori_b_mf_nonflat@_here_
+  - ../terms/a3_reference_action_target@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.observations.TokenizerCfg
+enable_corruption: false
+concatenate_terms: false

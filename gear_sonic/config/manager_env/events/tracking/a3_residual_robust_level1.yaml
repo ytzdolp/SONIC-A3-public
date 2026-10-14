@@ -1,0 +1,17 @@
+# Mild, repeatable velocity pushes for the first A3 residual robustness stage.
+defaults:
+  - terms/push_robot@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.events.EventCfg
+
+push_robot:
+  mode: "interval"
+  interval_range_s: [4.0, 6.0]
+  params:
+    velocity_range:
+      x: [-0.12, 0.12]
+      y: [-0.12, 0.12]
+      z: [0.0, 0.0]
+      roll: [-0.10, 0.10]
+      pitch: [-0.10, 0.10]
+      yaw: [-0.12, 0.12]

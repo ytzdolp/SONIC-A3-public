@@ -1,0 +1,7 @@
+joint_pos:
+  _target_: gear_sonic.envs.manager_env.mdp.actions.ReferenceResidualJointPositionActionCfg
+  asset_name: "robot"
+  joint_names: [".*"]
+  use_default_offset: true
+  command_name: "motion"
+  residual_scale: 0.25

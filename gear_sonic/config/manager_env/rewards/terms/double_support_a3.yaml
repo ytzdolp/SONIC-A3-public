@@ -1,0 +1,8 @@
+double_support_reward:
+  _target_: isaaclab.managers.RewardTermCfg
+  func: gear_sonic.envs.manager_env.mdp:double_support_reward
+  weight: 1.0
+  params:
+    sensor_name: "contact_forces"
+    foot_body_names: ["left_ankle_roll_link", "right_ankle_roll_link"]
+    force_threshold: 10.0

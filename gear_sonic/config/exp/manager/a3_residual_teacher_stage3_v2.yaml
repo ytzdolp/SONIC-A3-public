@@ -1,0 +1,136 @@
+# @package _global_
+# Stage-3 v2: conservative continuation from the completed v1 residual teacher.
+# Load actor/critic weights only; optimizer, scheduler, and iteration counters restart.
+
+defaults:
+  - /algo: ppo_im_phc
+  - /manager_env: base_env
+  - /callbacks/read_eval
+  - /callbacks/im_resample
+  - override /trainer: trl
+  - override /actor_critic: mlp
+  - override /manager_env/actions: tracking/a3_reference_residual
+  - override /manager_env/observations/policy: a3_residual_teacher
+  - override /manager_env/observations/critic: privileged_mf_hist
+  - override /manager_env/events: tracking/a3_stand_deterministic
+  - override /manager_env/terminations: tracking/a3_walk_bootstrap
+  - override /manager_env/rewards: tracking/a3_walk
+
+use_manager_env: true
+use_wandb: false
+project_name: TRL_A3_Residual_Teacher
+exp_base: ${hydra:runtime.choices.exp}
+exp_var: forward_residual_v2
+experiment_name: ${exp_base}_${exp_var}
+experiment_dir: ${base_dir}/${project_name}/${experiment_name}-${timestamp}
+
+checkpoint: checkpoints/a3_residual_teacher_stage3_v1_step2000.pt
+resume: false
+
+num_envs: 2048
+actor_prop_history_length: 10
+actor_actions_history_length: 10
+critic_prop_history_length: 10
+critic_actions_history_length: 10
+
+manager_env:
+  config:
+    robot:
+      type: a3_walk
+    terrain_type: plane
+  actions:
+    joint_pos:
+      residual_scale: 0.25
+      residual_clip: 4.0
+  rewards:
+    action_rate_l2:
+      weight: -0.10
+    residual_action_l2:
+      _target_: isaaclab.managers.RewardTermCfg
+      func: gear_sonic.envs.manager_env.mdp:residual_action_l2
+      weight: -0.03
+      params:
+        action_name: "joint_pos"
+    tracking_anchor_xy:
+      weight: 8.0
+    tracking_anchor_linvel:
+      weight: 6.0
+    upright_penalty:
+      weight: -6.0
+    anchor_height_penalty:
+      weight: -8.0
+    base_ang_vel_xy_penalty:
+      weight: -0.30
+    foot_slip_penalty:
+      weight: -0.50
+    # These imitation terms expect an absolute target, but this policy emits a residual.
+    tracking_action_target:
+      weight: 0.0
+    action_target_leg_l2:
+      weight: 0.0
+  terminations:
+    anchor_pos:
+      params:
+        threshold: 0.35
+    anchor_ori_full:
+      _target_: isaaclab.managers.TerminationTermCfg
+      func: gear_sonic.envs.manager_env.mdp:exceeded_anchor_ori
+      params:
+        asset_cfg:
+          _target_: isaaclab.managers.SceneEntityCfg
+          name: "robot"
+        command_name: "motion"
+        threshold: 0.80
+  commands:
+    motion:
+      reward_point_body:
+        [
+          "torso_link",
+          "left_wrist_yaw_link",
+          "right_wrist_yaw_link",
+          "left_ankle_roll_link",
+          "right_ankle_roll_link",
+        ]
+      reward_point_body_offset:
+        [
+          [0.0, 0.0, 0.5],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+          [0.0, 0.0, 0.0],
+        ]
+      num_future_frames: 10
+      dt_future_ref_frames: 0.1
+      freeze_frame_aug: true
+      motion_lib_cfg:
+        motion_file: sample_data/a3_human_like_teacher/a3_sonic_env_forward_motionlib.pkl
+        smpl_motion_file: dummy
+        smpl_y_up: true
+        asset:
+          assetFileName: "a3.xml"
+      start_from_first_frame: true
+
+algo:
+  trl:
+    report_to: tensorboard
+    logging_steps: 1
+  config:
+    num_steps_per_env: 24
+    num_learning_iterations: 1000
+    save_interval: 50
+    init_at_random_ep_len: false
+    init_noise_std: 0.08
+    actor_learning_rate: 2.0e-5
+    critic_learning_rate: 2.0e-4
+    entropy_coef: 0.001
+    adaptive_lr_max: 3.0e-5
+    adaptive_lr_min: 3.0e-6
+    use_clampped_std: true
+    std_clamp_min: 0.01
+    std_clamp_max: 0.10
+    max_grad_norm: 0.30
+
+callbacks:
+  model_save:
+    save_frequency: 100
+    save_last_frequency: 25
